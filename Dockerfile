@@ -14,4 +14,6 @@ RUN apt-get update && \
 RUN groupadd -r argocd && useradd --no-log-init -r -g argocd argocd
 USER argocd
 
+COPY ./cmp-plugin.yaml /home/argocd/cmp-server/config/plugin.yaml
+
 COPY ./sops-parser.sh /bin/sops-parser
