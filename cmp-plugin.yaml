@@ -8,5 +8,5 @@ spec:
     command: [sh, -c, 'echo "Initializing..."']
   generate:
     command: ["/bin/sops-parser"]
-  # discover:
-  #   fileName: "./subdir/s*.yaml"
+  discover:
+    fileName: "./secrets.yaml"
