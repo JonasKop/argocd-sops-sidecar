@@ -9,4 +9,5 @@ spec:
   generate:
     command: ["/bin/sops-parser"]
   discover:
-    fileName: "./secrets.yaml"
+    find:
+      command: [/bin/discover]
