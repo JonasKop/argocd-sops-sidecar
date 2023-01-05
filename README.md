@@ -1,0 +1,1 @@
+# Argo CD SOPS sidecar
