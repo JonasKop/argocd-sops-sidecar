@@ -1,0 +1,35 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build TMO
+    env:
+      REGISTRY: "ghcr.io/jonaskop"
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: docker/setup-qemu-action@v2
+      - uses: docker/setup-buildx-action@v2
+
+      - name: Login to registry
+        uses: docker/login-action@v2
+        with:
+          registry: "${{ env.REGISTRY }}"
+          username: "${{ github.actor }}"
+          password: "${{ github.token }}"
+
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: "ghcr.io/jonaskop/argocd-sops-sidecar:latest"
+          cache-from: "type=registry,ref=ghcr.io/jonaskop/argocd-sops-sidecar:buildcache"
+          cache-to: "type=registry,ref=ghcr.io/jonaskop/argocd-sops-sidecar:buildcache,mode=max"
