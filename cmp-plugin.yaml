@@ -1,18 +1,12 @@
-apiVersion: v1
-kind: ConfigMap
+apiVersion: argoproj.io/v1alpha1
+kind: ConfigManagementPlugin
 metadata:
   name: cmp-plugin
-data:
-  plugin.yaml: |
-    apiVersion: argoproj.io/v1alpha1
-    kind: ConfigManagementPlugin
-    metadata:
-      name: cmp-plugin
-    spec:
-      version: v1.0
-      init:
-        command: [sh, -c, 'echo "Initializing..."']
-      generate:
-        command: ["/bin/sops-parser"]
-      # discover:
-      #   fileName: "./subdir/s*.yaml"
+spec:
+  version: v1.0
+  init:
+    command: [sh, -c, 'echo "Initializing..."']
+  generate:
+    command: ["/bin/sops-parser"]
+  # discover:
+  #   fileName: "./subdir/s*.yaml"
